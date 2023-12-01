@@ -21,3 +21,10 @@ class ProfileView(View):
 
     def get(self, request):
         return render(request, self.template_name)
+    
+
+class ForgotView(View):
+    template_name = 'forgot.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
