@@ -1,3 +1,14 @@
 from django.contrib import admin
+from product.models import Product, Category
 
-# Register your models here.
+
+@admin.register(Product)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['title', 'date', 'status']
+    list_filter = ['title', 'date', 'status']
+    prepopulated_fields = {
+        'slug': ('title',)
+    }
+
+
+admin.site.register(Category)
