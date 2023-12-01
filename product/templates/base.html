@@ -197,7 +197,7 @@
             </div>
             <div class="col">
                 <div class="tp-mobile-item text-center">
-                <a href="profile.html" class="tp-mobile-item-btn">
+                <a href="{% url 'account:profile' %}" class="tp-mobile-item-btn">
                     <i class="flaticon-user"></i>
                     <span>پروفایل</span>
                 </a>
@@ -331,7 +331,7 @@
                             <span class="tp-header-setting-toggle" id="tp-header-setting-toggle">تنظیمات</span>
                             <ul>
                                 <li>
-                                    <a href="profile.html">پنل کاربری</a>
+                                    <a href="{% url 'account:profile' %}">پنل کاربری</a>
                                 </li>
                                 <li>
                                     <a href="wishlist.html">لیست علاقه مندیها</a>
@@ -339,9 +339,11 @@
                                 <li>
                                     <a href="cart.html">سبد خرید</a>
                                 </li>
+                                {% if requset.user.is_authenticated %}
                                 <li>
                                     <a href="login.html">خروج</a>
                                 </li>
+                                {% endif %}
                             </ul>
                             </div>
                         </div>
@@ -357,8 +359,8 @@
                 <div class="row align-items-center">
                 <div class="col-xl-2 col-lg-2 col-md-4 col-6">
                     <div class="logo">
-                        <a href="index.html">
-                            <img src="assets/img/logo/logo.svg" alt="logo">
+                        <a href="{% url 'product:index' %}">
+                            <img src="{% static 'img/logo/logo.svg' %}" alt="logo">
                         </a>
                     </div>
                 </div>
@@ -393,7 +395,7 @@
                 <div class="col-xl-4 col-lg-3 col-md-8 col-6">
                     <div class="tp-header-main-right d-flex align-items-center justify-content-end">
                         <div class="tp-header-login d-none d-lg-block">
-                            <a href="profile.html" class="d-flex align-items-center">
+                            <a href="{% url 'account:profile' %}" class="d-flex align-items-center">
                             <div class="tp-header-login-icon">
                                 <span>
                                     <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1059,8 +1061,8 @@
                     <div class="tp-footer-widget footer-col-1 mb-50">
                         <div class="tp-footer-widget-content">
                             <div class="tp-footer-logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo/logo.svg" alt="logo">
+                            <a href="{% url 'product:index' %}">
+                                <img src="{% static 'img/logo/logo.svg' %}" alt="logo">
                             </a>
                             </div>
                             <p class="tp-footer-desc">ما تیمی از طراحان و توسعه دهندگان هستیم که وردپرس با کیفیت بالا ایجاد می کنیم</p>
@@ -1153,13 +1155,13 @@
                 <div class="row align-items-center">
                     <div class="col-md-6">
                         <div class="tp-footer-copyright">
-                            <p>© 2023 کلیه حقوق محفوظ است | قالب HTML توسط <a href="index.html">shofy</a>.</p>
+                            <p>© 2023 کلیه حقوق محفوظ است | قالب HTML توسط <a href="{% url 'product:index' %}">shofy</a>.</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="tp-footer-payment text-md-start">
                             <p>
-                            <img src="assets/img/footer/footer-pay.png" alt="">
+                            <img src="{% static 'img/footer/footer-pay.png' %}" alt="">
                             </p>
                         </div>
                     </div>
