@@ -14,3 +14,17 @@ class ProductDetailView(View):
 
     def get(self, request):
         return render(request ,self.template_name)
+    
+
+class AboutUsView(View):
+    template_name = 'about.html'
+
+    def get(self, request):
+        return render(request ,self.template_name)
+    
+
+class ContactUsView(View):
+    template_name = 'contact.html'
+
+    def get(self, request):
+        return render(request ,self.template_name)
