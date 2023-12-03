@@ -1,12 +1,18 @@
 from django.shortcuts import render
 from django.views.generic import View
+from product.models import Product, Category
 
 
 class IndexView(View):
     template_name = 'index.html'
 
     def get(self, request):
-        return render(request ,self.template_name)
+        new_product = Product.objects.filter(status=1).all()[:8]
+
+        context = {
+            'new_product': new_product
+        }
+        return render(request ,self.template_name, context)
 
 
 class ProductDetailView(View):

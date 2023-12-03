@@ -367,11 +367,12 @@
                         <div class="tab-content" id="myTabContent">
                            <div class="tab-pane fade show active" id="new-tab-pane" role="tabpanel" aria-labelledby="new-tab" tabindex="0">
                               <div class="row">
+                                 {% for n in new_product %}
                                  <div class="col-xl-3 col-lg-3 col-sm-6">
                                     <div class="tp-product-item p-relative transition-3 mb-25">
                                        <div class="tp-product-thumb p-relative fix m-img">
-                                          <a href="product-details.html">
-                                             <img src="{% static 'img/product/product-1.jpg' %}" alt="product-electronic">
+                                          <a href="{{ n.get_detail_url }}">
+                                             <img src="{{ n.image.url }}" alt="product-electronic">
                                           </a>
                
                                           <!-- product badge -->
@@ -420,11 +421,11 @@
                                        <!-- product content -->
                                        <div class="tp-product-content">
                                           <div class="tp-product-category">
-                                             <a href="shop.html">تبلت</a>
+                                             <a href="shop.html">{{ n.category.category_name }}</a>
                                           </div>
                                           <h3 class="tp-product-title">
-                                             <a href="product-details.html">
-                                                تبلت گلکسی تب اس 6 لایت 10.4 اینچی اندرویدی 128 گیگابایتی.
+                                             <a href="{{ n.get_detail_url }}">
+                                               {{ n.title }}
                                              </a>
                                           </h3>
                                           <div class="tp-product-rating d-flex align-items-center">
@@ -440,12 +441,13 @@
                                              </div>
                                           </div>
                                           <div class="tp-product-price-wrapper">
-                                             <span class="tp-product-price old-price">320 هزار</span>
-                                             <span class="tp-product-price new-price">247 هزار</span>
+                                             <span class="tp-product-price old-price">{{ n.old_price }} هزار</span>
+                                             <span class="tp-product-price new-price">{{ n.price }} هزار</span>
                                           </div>
                                        </div>
                                     </div>
                                  </div>
+                                 {% endfor %}
                               </div>
                            </div>
                            <div class="tab-pane fade" id="featured-tab-pane" role="tabpanel" aria-labelledby="featured-tab" tabindex="0">
