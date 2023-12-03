@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {% endblock %}
+
+   {% block body %}
+
+      <main>
+
+         <!-- breadcrumb area start -->
+         <section class="breadcrumb__area include-bg text-center pt-95 pb-50">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xxl-12">
+                     <div class="breadcrumb__content p-relative z-index-1">
+                         <h3 class="breadcrumb__title">با ما در تماس باشید</h3>
+                         <div class="breadcrumb__list">
+                            <span><a href="#">صفحه اصلی</a></span>
+                            <span>تماس</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- breadcrumb area end -->
+
+
+         <!-- contact area start -->
+         <section class="tp-contact-area pb-100">
+            <div class="container">
+               <div class="tp-contact-inner">
+                  <div class="row">
+                     <div class="col-xl-9 col-lg-8">
+                        <div class="tp-contact-wrapper">
+                           <h3 class="tp-contact-title">پیام ارسال کنید</h3>
+
+                            <div class="tp-contact-form">
+                               <form id="contact-form" action="" method="">
+                                  <div class="tp-contact-input-wrapper">
+                                     <div class="tp-contact-input-box">
+                                        <div class="tp-contact-input">
+                                           <input name="name" id="name" type="text" placeholder="شهنواز سکیل">
+                                        </div>
+                                        <div class="tp-contact-input-title">
+                                           <label for="name">نام شما</label>
+                                        </div>
+                                     </div>
+                                     <div class="tp-contact-input-box">
+                                        <div class="tp-contact-input">
+                                           <input name="email" id="email" type="email" placeholder="shofy@mail.com">
+                                        </div>
+                                        <div class="tp-contact-input-title">
+                                           <label for="email">ایمیل شما</label>
+                                        </div>
+                                     </div>
+                                     <div class="tp-contact-input-box">
+                                        <div class="tp-contact-input">
+                                           <input name="subject" id="subject" type="text" placeholder="موضوع خود را بنویسید">
+                                        </div>
+                                        <div class="tp-contact-input-title">
+                                           <label for="subject">موضوع</label>
+                                        </div>
+                                     </div>
+                                     <div class="tp-contact-input-box">
+                                        <div class="tp-contact-input">
+                                          <textarea id="message" name="message" placeholder="پیام خود را بنویسید..."></textarea>
+                                        </div>
+                                        <div class="tp-contact-input-title">
+                                           <label for="message">پیام شما</label>
+                                        </div>
+                                     </div>
+                                  </div>
+                                  <div class="tp-contact-suggetions mb-20">
+                                     <div class="tp-contact-remeber">
+                                        <input id="remeber" type="checkbox">
+                                        <label for="remeber">نام، ایمیل و وب‌سایت من را برای دفعه بعد که نظر می‌دهم در این مرورگر ذخیره کنید.</label>
+                                     </div>
+                                  </div>
+                                  <div class="tp-contact-btn">
+                                     <button type="submit">ارسال پیام</button>
+                                 </div>
+                              </form>
+                              <p class="ajax-response"></p>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-3 col-lg-4">
+                        <div class="tp-contact-info-wrapper">
+                           <div class="tp-contact-info-item">
+                              <div class="tp-contact-info-icon">
+                                 <span>
+                                    <img src="{% static 'img/contact/contact-icon-1.png' %}" alt="">
+                                 </span>
+                              </div>
+                              <div class="tp-contact-info-content">
+                                 <p data-info="mail"><a href="mailto:contact@shofy.com">contact@shofy.com</a></p>
+                                 <p data-info="phone"><a href="tel:670-413-90-762">989123456789</a></p>
+                              </div>
+                           </div>
+                           <div class="tp-contact-info-item">
+                              <div class="tp-contact-info-icon">
+                                 <span>
+                                    <img src="{% static 'img/contact/contact-icon-2.png' %}" alt="">
+                                 </span>
+                              </div>
+                              <div class="tp-contact-info-content">
+                                 <p>
+                                    <a href="https://www.google.com/maps/place/New+York,+NY,+USA/@40.6976637,-74.1197638,11z/data=!3m1!4b1!4m6!3m5!1s0x89c24fa5d33f083b:0xc80b8f06e177fe62!8m2!3d40.7127753!4d-74.0059728!16zL20vMDJfMjg2" target="_blank">
+                                       ایران تهران - تهران <br> شرکت کدتم
+                                    </a>
+                                 </p>
+                              </div>
+                           </div>
+                           <div class="tp-contact-info-item">
+                              <div class="tp-contact-info-icon">
+                                 <span>
+                                    <img src="{% static 'img/contact/contact-icon-3.png' %}" alt="">
+                                 </span>
+                              </div>
+                              <div class="tp-contact-info-content">
+                                 <div class="tp-contact-social-wrapper mt-5">
+                                    <h4 class="tp-contact-social-title">در رسانه های اجتماعی پیدا کنید</h4>
+
+                                    <div class="tp-contact-social-icon">
+                                       <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                       <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                       <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- contact area end -->
+
+         <!-- map area start -->
+         <section class="tp-map-area pb-120">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-12">
+                     <div class="tp-map-wrapper">
+                        <div class="tp-map-hotspot">
+                           <span class="tp-hotspot tp-pulse-border">
+                              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <circle cx="6" cy="6" r="6" fill="#821F40"/>
+                              </svg>
+                           </span>
+                        </div>
+                        <div class="tp-map-iframe">
+                           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d207344.0754342176!2d51.18284458066478!3d35.707740217686975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e00491ff3dcd9%3A0xf0b3697c567024bc!2sTehran%2C%20Tehran%20Province%2C%20Iran!5e0!3m2!1sen!2s!4v1694622408118!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- map area end -->
+
+      </main>
+   {% endblock %}
+
+
