@@ -1,6 +1,8 @@
+from typing import Any
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, DetailView
 from product.models import Product, Category
+from django.shortcuts import get_object_or_404
 
 
 class IndexView(View):
@@ -8,19 +10,28 @@ class IndexView(View):
 
     def get(self, request):
         new_product = Product.objects.filter(status=1).all()[:8]
+        category = Category.objects.all()
 
         context = {
-            'new_product': new_product
+            'new_product': new_product,
+            'category': category
         }
         return render(request ,self.template_name, context)
 
 
-class ProductDetailView(View):
+class ProductDetailView(DetailView):
     template_name = 'product-detail.html'
+    model = Product
+    slug_url_kwarg = 'slug'
+    query_pk_and_slug = True
+    context_object_name = 'product'
 
-    def get(self, request):
-        return render(request ,self.template_name)
-    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = get_object_or_404(Product, status=True, slug=self.kwargs['slug'])
+        context['related_product'] = Product.objects.filter(category__product=product, status=True).exclude(slug=self.kwargs['slug'])[:4]
+        return context
+
 
 class CartView(View):
     template_name = 'cart.html'

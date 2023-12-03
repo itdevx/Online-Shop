@@ -151,81 +151,24 @@
          <section class="tp-product-category pt-60 pb-15">
             <div class="container">
                <div class="row row-cols-xl-5 row-cols-lg-5 row-cols-md-4">
+                  {% for c in category %}
                   <div class="col">
                      <div class="tp-product-category-item text-center mb-40">
                         <div class="tp-product-category-thumb fix">
                            <a href="shop-category.html">
-                              <img src="{% static 'img/product/category/product-cat-1.png' %}" alt="product-category">
+                              <img src="{{ c.ima
+                                 ge.url }}" alt="product-category">
                            </a>
                         </div>
                         <div class="tp-product-category-content">
                            <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">هدفون</a>
+                              <a href="shop-category.html">{{ c.title }}</a>
                            </h3>
                            <p>20 محصول</p>
                         </div>
                      </div>
                   </div>
-                  <div class="col">
-                     <div class="tp-product-category-item text-center mb-40">
-                        <div class="tp-product-category-thumb fix">
-                           <a href="shop-category.html">
-                              <img src="{% static 'img/product/category/product-cat-2.png' %}" alt="product-category">
-                           </a>
-                        </div>
-                        <div class="tp-product-category-content">
-                           <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">تلفن همراه</a>
-                           </h3>
-                           <p>25 محصول</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col">
-                     <div class="tp-product-category-item text-center mb-40">
-                        <div class="tp-product-category-thumb fix">
-                           <a href="shop-category.html">
-                              <img src="{% static 'img/product/category/product-cat-3.png' %}" alt="product-category">
-                           </a>
-                        </div>
-                        <div class="tp-product-category-content">
-                           <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">لوله های حرارتی CPU</a>
-                           </h3>
-                           <p>57 محصول</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col">
-                     <div class="tp-product-category-item text-center mb-40">
-                        <div class="tp-product-category-thumb fix">
-                           <a href="shop-category.html">
-                              <img src="{% static 'img/product/category/product-cat-4.png' %}" alt="product-category">
-                           </a>
-                        </div>
-                        <div class="tp-product-category-content">
-                           <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">ساعت هوشمند</a>
-                           </h3>
-                           <p>44 محصول</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col">
-                     <div class="tp-product-category-item text-center mb-40">
-                        <div class="tp-product-category-thumb fix">
-                           <a href="shop-category.html">
-                              <img src="{% static 'img/product/category/product-cat-5.png' %}" alt="product-category">
-                           </a>
-                        </div>
-                        <div class="tp-product-category-content">
-                           <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">با بلوتوث </a>
-                           </h3>
-                           <p>81 محصول</p>
-                        </div>
-                     </div>
-                  </div>
+                  {% endfor %}
                </div>
             </div>
          </section>
@@ -421,7 +364,7 @@
                                        <!-- product content -->
                                        <div class="tp-product-content">
                                           <div class="tp-product-category">
-                                             <a href="shop.html">{{ n.category.category_name }}</a>
+                                             <a href="shop.html">{{ n.category }}</a>
                                           </div>
                                           <h3 class="tp-product-title">
                                              <a href="{{ n.get_detail_url }}">
