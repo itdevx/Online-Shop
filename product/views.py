@@ -1,5 +1,4 @@
-from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import View, DetailView
 from product.models import Product, Category
 from django.shortcuts import get_object_or_404
@@ -29,8 +28,18 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = get_object_or_404(Product, status=True, slug=self.kwargs['slug'])
-        context['related_product'] = Product.objects.filter(category__product=product, status=True).exclude(slug=self.kwargs['slug'])[:4]
+        context['related_product'] = Product.objects.filter(category__product=product, status=True).exclude(slug=self.kwargs['slug'])[:4] 
+        loaded_product = self.object
+        product_id = self.request.session['product_fav']
+        context['is_fav'] = product_id == str(loaded_product.id)
         return context
+    
+
+class AddToFavorite(View):
+    def post(self, request):
+        product_id = request.POST['slug']
+        request.session['product_fav'] = product_id
+        return redirect('product:product-detail', product_id)
 
 
 class CartView(View):

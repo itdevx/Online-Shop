@@ -48,8 +48,12 @@
                   </div> <!-- col end -->
                   <div class="col-xl-5 col-lg-6">
                      <div class="tp-product-details-wrapper">
-                        <div class="tp-product-details-category">
+                        <div class="d-flex justify-content-between tp-product-details-category">
+
                            <span>{{ product.category }}</span>
+                           {% if is_fav %}
+                              <span class="  ">این محصول جزو کاای محبوب شمااست</span>
+                           {% endif %}
                            </div>
                            <h3 class="tp-product-details-title">{{ product.title }}</h3>
 
@@ -126,7 +130,13 @@
                                  </div>
                               </div>
                               <div class="tp-product-details-add-to-cart mb-15 w-100">
-                                 <button class="tp-product-details-add-to-cart-btn w-100">افزودن به سبد خرید</button>
+                                 <form action="{% url 'product:add-to-fav' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="slug" value="{{ product.slug }}">
+                                    <button type="submit" class="tp-product-details-add-to-cart-btn w-100">افزودن به عنوان کالای محبوب</button>
+                                    <!-- <button class="tp-product-details-add-to-cart-btn w-100">افزودن به سبد خرید</button> -->
+                                 </form>
+                                 
                               </div>
                            </div>
                            <button class="tp-product-details-buy-now-btn w-100">خرید</button>
