@@ -3,7 +3,8 @@ from django.views.generic import View, CreateView
 from account.forms import RegisterForm
 from account.models import User
 from django.contrib.auth import get_user_model
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
+from account.forms import LoginForm
 
 # email
 from django.contrib.sites.shortcuts import get_current_site
@@ -18,10 +19,25 @@ from django.http import HttpResponse
 
 class LoginView(View):
     template_name = 'login.html'
+    form_class = LoginForm
 
     def get(self, request):
-        return render(request, self.template_name)
+        form = self.form_class()
+        return render(request, self.template_name, {'form': form})
 
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = authenticate(
+                username=form.cleaned_data['username'],
+                password=form.cleaned_data['password']
+            )
+            if user is not None:
+                login(request, user)
+                return redirect('product:index')
+
+        return render(request, self.template_name, {'form': form})
+        
 
 class RegisterView(CreateView):
     template_name = 'register.html'

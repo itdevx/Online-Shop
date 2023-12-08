@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import View, DetailView
 from product.models import Product, Category
 from django.shortcuts import get_object_or_404
+import sweetify
+from django.contrib import messages
 
 
 class IndexView(View):
@@ -10,7 +12,6 @@ class IndexView(View):
     def get(self, request):
         new_product = Product.objects.filter(status=1).all()[:8]
         category = Category.objects.all()
-
         context = {
             'new_product': new_product,
             'category': category
@@ -30,7 +31,7 @@ class ProductDetailView(DetailView):
         product = get_object_or_404(Product, status=True, slug=self.kwargs['slug'])
         context['related_product'] = Product.objects.filter(category__product=product, status=True).exclude(slug=self.kwargs['slug'])[:4] 
         loaded_product = self.object
-        product_id = self.request.session['product_fav']
+        product_id = self.request.session.get('product_fav')
         context['is_fav'] = product_id == str(loaded_product.id)
         return context
     
