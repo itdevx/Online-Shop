@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from account.views import verify
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('product.urls')),
     path('', include('account.urls')),
+
+    path('verify/<uidb64>/<token>', verify, name='verify')
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
