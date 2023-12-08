@@ -17,26 +17,33 @@ from django.http import HttpResponse
 
 
 
+
 class LoginView(View):
     template_name = 'login.html'
     form_class = LoginForm
 
     def get(self, request):
-        form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        if request.user.is_authenticated:
+            return redirect('product:index')
+        else:
+            form = self.form_class()
+            return render(request, self.template_name, {'form': form})
 
     def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
-            )
-            if user is not None:
-                login(request, user)
-                return redirect('product:index')
+        if request.user.is_authenticated:
+            return redirect('product:index')
+        else:
+            form = self.form_class(request.POST)
+            if form.is_valid():
+                user = authenticate(
+                    username=form.cleaned_data['username'],
+                    password=form.cleaned_data['password']
+                )
+                if user is not None:
+                    login(request, user)
+                    return redirect('product:index')
 
-        return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {'form': form})
         
 
 class RegisterView(CreateView):
@@ -44,23 +51,26 @@ class RegisterView(CreateView):
     form_class = RegisterForm
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
-        current_site = get_current_site(self.request)
-        mail_subject = 'فعالسازی اکانت '
-        message = render_to_string('registration/account_active_email.html', {
-            'user': user,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': account_activation_token.make_token(user)
-        })
-        to_email = form.cleaned_data.get('email')
-        email = EmailMessage(
-            mail_subject, message, to=[to_email]
-        )
-        email.send()
-        return HttpResponse('Please confirm your email address to complete the registration')
+        if self.request.user.is_authenticated:
+            return redirect('product:index')
+        else:
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(self.request)
+            mail_subject = 'فعالسازی اکانت '
+            message = render_to_string('registration/account_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user)
+            })
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
+            return HttpResponse('Please confirm your email address to complete the registration')
 
 
 def verify(request, uidb64, token):
@@ -79,7 +89,10 @@ def verify(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')  
 
 
-
+class LogoutRequest(View):
+    def get(self, request):
+        logout(request)
+        return redirect('product:index')
 
 
 class ProfileView(View):

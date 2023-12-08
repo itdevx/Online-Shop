@@ -1,6 +1,15 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.db.models import Q
+
+
+class Manager(models.Manager):
+    # def get_post_by_category(self, category_slug):
+    #     return self.get_queryset().filter(categories__category_slug__iexact=category_slug, status=True)
+    pass
+
+
 
 
 class Category(models.Model):

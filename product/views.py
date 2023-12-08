@@ -1,9 +1,12 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import View, DetailView
+from django.views.generic import View, DetailView, ListView
 from product.models import Product, Category
 from django.shortcuts import get_object_or_404
 import sweetify
 from django.contrib import messages
+from django.db.models import Q
 
 
 class IndexView(View):
@@ -12,6 +15,7 @@ class IndexView(View):
     def get(self, request):
         new_product = Product.objects.filter(status=1).all()[:8]
         category = Category.objects.all()
+        print(category)
         context = {
             'new_product': new_product,
             'category': category
@@ -42,6 +46,24 @@ class AddToFavorite(View):
         request.session['product_fav'] = product_id
         return redirect('product:product-detail', product_id)
 
+
+class SearchView(ListView):
+    template_name = 'shop.html'
+    context_object_name = 'products'
+    paginate_by = 8
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        return context
+    
+    def get_queryset(self):
+        request = self.request
+        query = request.GET.get('q')
+        if query is not None:
+            product_query = Q(title__icontains=query) | Q(description__icontains=query)
+            return Product.objects.filter(product_query, status=True).distinct()
+        
 
 class CartView(View):
     template_name = 'cart.html'
