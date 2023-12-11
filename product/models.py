@@ -5,11 +5,8 @@ from django.db.models import Q
 
 
 class Manager(models.Manager):
-    # def get_post_by_category(self, category_slug):
-    #     return self.get_queryset().filter(categories__category_slug__iexact=category_slug, status=True)
-    pass
-
-
+    def get_prodcut_by_category(self, category_slug):
+        return self.get_queryset().filter(category__category_slug__iexact=category_slug, status=True)
 
 
 class Category(models.Model):
@@ -36,6 +33,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product-images')
     status = models.BooleanField(default=True)
     date = models.DateField(auto_now_add=True)
+    objects = Manager()
 
     def __str__(self):
         return self.title

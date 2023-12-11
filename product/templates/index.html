@@ -160,7 +160,7 @@
                         </div>
                         <div class="tp-product-category-content">
                            <h3 class="tp-product-category-title">
-                              <a href="shop-category.html">{{ c.title }}</a>
+                              <a href="/category-product/{{ c.category_slug }}">{{ c.category_name }}</a>
                            </h3>
                            <p>20 محصول</p>
                         </div>
@@ -362,7 +362,7 @@
                                        <!-- product content -->
                                        <div class="tp-product-content">
                                           <div class="tp-product-category">
-                                             <a href="shop.html">{{ n.category }}</a>
+                                             <a href="/category-product/{{ n.category.category_slug }}">{{ n.category }}</a>
                                           </div>
                                           <h3 class="tp-product-title">
                                              <a href="{{ n.get_detail_url }}">

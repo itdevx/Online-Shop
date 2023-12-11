@@ -54,7 +54,6 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         return context
     
     def get_queryset(self):
@@ -64,6 +63,22 @@ class SearchView(ListView):
             product_query = Q(title__icontains=query) | Q(description__icontains=query)
             return Product.objects.filter(product_query, status=True).distinct()
         
+
+class CategoryView(ListView):
+    template_name = 'shop.html'
+    context_object_name = 'products'
+    paginate_by = 8
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        category = Category.objects.filter(category_name__iexact=slug).first()
+        if category is None:
+            return Product.objects.get_prodcut_by_category(slug)
+    
 
 class CartView(View):
     template_name = 'cart.html'

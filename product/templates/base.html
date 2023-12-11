@@ -146,9 +146,9 @@
                 <div class="tp-search-close text-center mb-20">
                     <button class="tp-search-close-btn tp-search-close-btn"></button>
                 </div>
-                <form action="#">
+                <form action="{% url 'product:search' %}" method="get">
                     <div class="tp-search-input mb-10">
-                        <input type="text" placeholder="جستجو در محصولات">
+                        <input type="text" name="q" placeholder="جستجو در محصولات">
                         <button type="submit"><i class="flaticon-search-1"></i></button>
                     </div>
                     <div class="tp-search-category">
@@ -397,7 +397,7 @@
                                 <select>
                                     <option>دسته را انتخاب کنید</option>
                                     {% for c in category %}
-                                    <button>{{ c.category_name }}</button>
+                                        <button>{{ c.category_name }}</button>
                                     {% endfor %}
                                 </select>
                             </div>

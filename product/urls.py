@@ -15,4 +15,5 @@ urlpatterns = [
     path('wishlist/', WishlistView.as_view(), name='wishlist'),
     path('shop/', ShopListView.as_view(), name='shop'),
     path('search/', SearchView.as_view(), name='search'),
+    path('category-product/<slug>/', CategoryView.as_view(), name='category'),
 ]
